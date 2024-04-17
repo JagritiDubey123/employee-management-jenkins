@@ -8,5 +8,5 @@ COPY FrontEnd/. .
 # COPY . .
 # COPY . /usr/src/app
 EXPOSE 5000
-CMD ["npm", "app.js"]
+CMD ["node", "app.js"]
 # 
