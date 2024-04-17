@@ -20,9 +20,9 @@ pipeline {
             steps {
                 script {
                     // Build Docker images
-                    sh "docker build -f FrontEnd/Dockerfile -t $DOCKER_REGISTRY/$GCP_PROJECT_ID/$IMAGE_NAME:$TAG ."
-                    sh "docker build -f backend/Dockerfile -t $DOCKER_REGISTRY/$GCP_PROJECT_ID/$IMAGE2_NAME:$TAG ."
-                    sh "docker build -f mysql/Dockerfile -t $DOCKER_REGISTRY/$GCP_PROJECT_ID/$IMAGE3_NAME:$TAG ."
+                    sh "sudo docker build -f FrontEnd/Dockerfile -t $DOCKER_REGISTRY/$GCP_PROJECT_ID/$IMAGE_NAME:$TAG ."
+                    sh "sudo docker build -f backend/Dockerfile -t $DOCKER_REGISTRY/$GCP_PROJECT_ID/$IMAGE2_NAME:$TAG ."
+                    sh "sudo docker build -f mysql/Dockerfile -t $DOCKER_REGISTRY/$GCP_PROJECT_ID/$IMAGE3_NAME:$TAG ."
                 }
             }
         }
@@ -31,13 +31,13 @@ pipeline {
             steps {
                 script {
                     // Run MySQL container
-                    sh "docker run -d --name mysql -p 3306:3306 $DOCKER_REGISTRY/$GCP_PROJECT_ID/$IMAGE3_NAME:$TAG"
+                    sh "sudo docker run -d --name mysql -p 3306:3306 $DOCKER_REGISTRY/$GCP_PROJECT_ID/$IMAGE3_NAME:$TAG"
 
                     // Run backend container
-                    sh "docker run -d --name backend -p 8000:8000 --link mysql:mysql $DOCKER_REGISTRY/$GCP_PROJECT_ID/$IMAGE2_NAME:$TAG"
+                    sh "sudo docker run -d --name backend -p 8000:8000 --link mysql:mysql $DOCKER_REGISTRY/$GCP_PROJECT_ID/$IMAGE2_NAME:$TAG"
 
                     // Run frontend container
-                    sh "docker run -d --name frontend-container --link mysql:mysql -p 5000:5000 $DOCKER_REGISTRY/$GCP_PROJECT_ID/$IMAGE_NAME:$TAG"
+                    sh "sudo docker run -d --name frontend-container --link mysql:mysql -p 5000:5000 $DOCKER_REGISTRY/$GCP_PROJECT_ID/$IMAGE_NAME:$TAG"
                 }
             }
         }
