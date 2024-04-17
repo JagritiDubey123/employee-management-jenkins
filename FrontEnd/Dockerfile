@@ -4,8 +4,9 @@ WORKDIR /usr/src/app
 # COPY FrontEnd/package.json /usr/src/app
 COPY FrontEnd/package.json ./
 RUN npm install
-COPY . .
+COPY FrontEnd/. .
+# COPY . .
 # COPY . /usr/src/app
 EXPOSE 5000
-CMD ["npm", "start"]
+CMD ["npm", "app.js"]
 # 
