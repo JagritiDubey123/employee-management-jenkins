@@ -3,7 +3,7 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 COPY FrontEnd/package.json /usr/src/app
 RUN npm install
-COPY app.js /usr/src/app/
+COPY . /usr/src/app
 EXPOSE 5000
 CMD ["npm", "start"]
-# COPY . /usr/src/app
+# 
