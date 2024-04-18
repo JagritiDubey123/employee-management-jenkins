@@ -1,7 +1,5 @@
 pipeline {
-    agent any{
-         label 'test' // Specify the label assigned to your new node
-    }
+    agent any
     environment {
         DOCKER_REGISTRY = "gcr.io"  // Your GCR registry URL
         IMAGE_NAME = "frontend" // Your Docker image name
